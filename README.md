@@ -1,15 +1,21 @@
-# GFH Telecom Automation
+# GFH Accessories Ordering
 
-GFH Telecom automation suite - Inventory Audit and Accessories Ordering.
+GFH Telecom accessories ordering automation for VidaPay — automated ordering flow with the fixed-header grid UI and GFH branding.
 
-## Files
-- GFH_Inventory_Audit.py - Inventory audit automation
-- GFH_Accessories_Ordering.py - Accessories ordering automation
-- gfh_telecom_llc_icon.ico - Application icon (embedded in .exe for taskbar/titlebar/Windows Explorer)
+## App
+
+| File | Purpose |
+|------|---------|
+| `GFH_Accessories_Ordering.py` | Accessories ordering automation |
 
 ## Build
-GitHub Actions automatically builds Windows .exe files on every push to main.
-The icon is embedded via PyInstaller --icon flag so it appears in:
-- Windows Taskbar
-- Window Title Bar
-- Windows Explorer
+
+- **Locally:** run `build_GFH_Accessories_Ordering.bat` — force-syncs this repo from GitHub (self-heals origin, resets to `origin/main`), then builds the exe with PyInstaller into `C:\Users\AbadUmairChanna\Downloads\GitHub`.
+- **CI:** every push to `main` builds the exe on GitHub Actions and publishes a **GFH Build N** release with the exe attached.
+
+## Support modules
+
+- `logo_handler.py` — GFH Telecom logo/icon loading (shared)
+- `theme_manager.py` — dark theme helpers (shared)
+- `header_manager.py` — fixed-header grid UI manager
+- `assets/`, `gfh_icon.ico`, `GFH_Telecom_Logo.png`, `stores.json` — bundled resources referenced by the `.spec` file

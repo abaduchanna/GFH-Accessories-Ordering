@@ -1,0 +1,108 @@
+@echo off
+setlocal enabledelayedexpansion
+title Build GFH_Accessories_Ordering
+
+set "SRCDIR=C:\Users\AbadUmairChanna\Downloads\GitHub\GFH-Accessories-Ordering"
+set "OUTDIR=C:\Users\AbadUmairChanna\Downloads\GitHub"
+set "REPOURL=https://github.com/abaduchanna/GFH-Accessories-Ordering.git"
+set "WORKBASE=%TEMP%\pyi_build\GFH_Accessories_Ordering"
+
+echo.
+echo  ============================================================
+echo   Building: GFH_Accessories_Ordering.exe
+echo  ============================================================
+echo.
+
+REM Check prerequisites
+python --version >nul 2>&1
+if errorlevel 1 (
+    echo    ERROR: Python not found in PATH.
+    pause
+    exit /b 1
+)
+python -m PyInstaller --version >nul 2>&1
+if errorlevel 1 (
+    echo    PyInstaller not found. Installing...
+    python -m pip install --upgrade pyinstaller
+)
+git --version >nul 2>&1
+if errorlevel 1 (
+    echo    ERROR: Git not found in PATH.
+    pause
+    exit /b 1
+)
+echo    Prerequisites OK
+echo.
+
+REM Clone or force-sync
+REM A plain "git pull" breaks when the clone's origin still embeds an old
+REM revoked token (401) or when history on GitHub was rewritten. Self-heal
+REM the origin URL to the clean public URL (repo is public, no auth needed)
+REM and hard-reset to origin/main - this ALWAYS ends up byte-identical to
+REM GitHub no matter what happened before.
+if exist "%SRCDIR%" (
+    echo    Syncing latest from GitHub...
+    cd "%SRCDIR%"
+    git remote set-url origin "%REPOURL%" >nul 2>&1
+    git fetch origin 2>&1
+    git reset --hard origin/main 2>&1
+) else (
+    echo    Cloning GFH-Accessories-Ordering...
+    git clone "%REPOURL%" "%SRCDIR%" 2>&1
+)
+
+cd "%SRCDIR%"
+set "BUILD_COMMIT="
+for /f "usebackq delims=" %%C in (`git rev-parse --short HEAD 2^>nul`) do set "BUILD_COMMIT=%%C"
+echo    Source commit: !BUILD_COMMIT!
+
+REM Clean previous build
+echo    Cleaning previous build...
+if exist "build" rmdir /s /q "build"
+if exist "dist" rmdir /s /q "dist"
+if exist "__pycache__" rmdir /s /q "__pycache__"
+del /s /q *.pyc 2>nul
+
+REM Redirect workpath to TEMP
+if exist "%WORKBASE%" rmdir /s /q "%WORKBASE%"
+mkdir "%WORKBASE%" 2>nul
+
+REM Install deps
+if exist "requirements.txt" (
+    echo    Installing requirements...
+    python -m pip install -r requirements.txt --quiet 2>nul
+)
+
+REM Build
+echo    Building GFH_Accessories_Ordering.spec...
+python -m PyInstaller "GFH_Accessories_Ordering.spec" --noconfirm --clean --workpath "%WORKBASE%" 2>&1
+
+if errorlevel 1 (
+    echo    FAILED: GFH_Accessories_Ordering
+    pause
+    exit /b 1
+)
+
+echo    SUCCESS: GFH_Accessories_Ordering
+
+REM Copy .exe to output
+if exist "dist\GFH_Accessories_Ordering.exe" (
+    if not exist "%OUTDIR%" mkdir "%OUTDIR%"
+    copy /Y "dist\GFH_Accessories_Ordering.exe" "%OUTDIR%\GFH_Accessories_Ordering.exe" >nul
+    if errorlevel 1 (
+        echo    WARNING: could not overwrite GFH_Accessories_Ordering.exe - close the running exe and rebuild.
+    ) else (
+        echo    Collected: %OUTDIR%\GFH_Accessories_Ordering.exe
+    )
+) else (
+    echo    WARNING: dist\GFH_Accessories_Ordering.exe not found
+)
+
+echo.
+echo  ============================================================
+echo   Done: GFH_Accessories_Ordering.exe  (source commit !BUILD_COMMIT!)
+echo  ============================================================
+echo.
+pause
+endlocal
+exit /b 0
