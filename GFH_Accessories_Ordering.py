@@ -1,4 +1,4 @@
-# Developed by Abad Umair Channa | Copyright © {date.today().year} | All rights reserved. Developed by Abad Umair Channa | Copyright © {date.today().year} | All rights reserved.
+# Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved. Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved.
 #!/usr/bin/env python3
 """
 GFH Telecom LLC Accessories Ordering Automation - GUI FINAL
@@ -1583,13 +1583,13 @@ class GFHAccessoriesAutomationGUI:
         set_log_callback(self.enqueue_log)
         set_progress_callback(self.enqueue_progress)
 
-        # ── Developed by Abad Umair Channa | Copyright © {date.today().year} | All rights reserved. If packed
+        # ── Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved. If packed
         # after the expanding body (fill=BOTH, expand=True), the body consumes
         # the whole pack cavity and squeezes this bar to zero height. ────────
         _cbar = tk.Frame(self.root, bg="#090d26", height=24)
         _cbar.pack(fill="x", side="bottom")
         _cbar.pack_propagate(False)
-        tk.Label(_cbar, text=f"Developed by Abad Umair Channa | Copyright © {date.today().year} | All rights reserved.",
+        tk.Label(_cbar, text=f"Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved.",
                  font=("Segoe UI", 8), fg="#9d9db8", bg="#090d26").pack(expand=True, fill="both")
 
         self.build_style()
