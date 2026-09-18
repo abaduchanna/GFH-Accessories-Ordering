@@ -1,4 +1,4 @@
-# Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved. Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved.
+# Developed by www.3SVerse.com | Copyright © {date.today().year} | All rights reserved.
 #!/usr/bin/env python3
 """
 GFH Telecom LLC Accessories Ordering Automation - GUI FINAL
