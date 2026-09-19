@@ -1459,7 +1459,7 @@ GFH_SQUARE_ICON_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__
 
 # ── Edge automation profile + port ───────────────────────────────────────────
 # Distinct from Extractor (9222), Ordering (9223), Transfer Bot (9224),
-# UPS (9225), Scraper (9226) so running multiple GFH/VidaPay tools at
+# Rebate Filing (9225), Scraper (9226) so running multiple GFH/VidaPay tools at
 # once each gets its own Edge process/window instead of colliding.
 AUTOMATION_PROFILE_DIR = r"C:\GFH_Edge_Automation_Profile_AccessoriesOrdering"
 REMOTE_DEBUGGING_PORT = 9227
