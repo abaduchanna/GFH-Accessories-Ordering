@@ -1454,7 +1454,7 @@ def resource_path(relative_path):
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), relative_path)
 
 GFH_LOGO_PNG_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "gfh_logo_png_b64.txt"), "r").read().strip() if not getattr(sys, "frozen", False) else open(os.path.join(getattr(sys, "_MEIPASS", "."), "assets", "gfh_logo_png_b64.txt"), "r").read().strip()
-GFH_ICON_ICO_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "gfh_icon_ico_b64.txt"), "r").read().strip() if not getattr(sys, "frozen", False) else open(os.path.join(getattr(sys, "_MEIPASS", "."), "assets", "gfh_icon_ico_b64.txt"), "r").read().strip()
+GFH_ICON_ICO_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "GFH_icon_ico_b64.txt"), "r").read().strip() if not getattr(sys, "frozen", False) else open(os.path.join(getattr(sys, "_MEIPASS", "."), "assets", "GFH_icon_ico_b64.txt"), "r").read().strip()
 GFH_SQUARE_ICON_B64 = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "gfh_square_icon_b64.txt"), "r").read().strip() if not getattr(sys, "frozen", False) else open(os.path.join(getattr(sys, "_MEIPASS", "."), "assets", "gfh_square_icon_b64.txt"), "r").read().strip()
 
 # ── Edge automation profile + port ───────────────────────────────────────────
@@ -1675,7 +1675,7 @@ class GFHAccessoriesAutomationGUI:
         import sys as _sys, os as _os
         _meipass = getattr(_sys, "_MEIPASS", None)
         if _meipass:
-            for _ico_name in ("gfh_icon.ico", "gfh_telecom_llc_icon.ico", "gfh_icon.ico"):
+            for _ico_name in ("GFH_icon.ico", "gfh_telecom_llc_icon.ico", "GFH_icon.ico"):
                 _ico_path = _os.path.join(_meipass, _ico_name)
                 if _os.path.exists(_ico_path):
                     try:
